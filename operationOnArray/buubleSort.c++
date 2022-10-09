@@ -1,51 +1,56 @@
 #include <iostream>
+using namespace::std;
 
 class bub{
     private:
-    int arr[10] = {9,8,7,6,5,4,3,2,1,0};
-    int update, temp;
-    bool cond;
+    int update;
+    bool sorted;
+    void swap(int*, int*);
 
     public:
-    void prnt();
-    int* bubble();
+    void srt(int, int*);
+    void prnt(int* , int);
     bub();
-    ~bub();
+    ~bub(){};
 };
-bub::bub():update(9), temp(0), cond(false){
-    std::cout<<"Constructor initialised for no arg"<<std::endl;
-};
-bub::~bub(){
-    std::cout<<"\nDestructor called!!"<<std::endl;
+bub::bub()
+:update(0), sorted(false){
+
 }
 int main(){
-    bub* first = new bub;
-    std::cout<<"Before sorting: "<<std::endl;
-    first->prnt();
-    first->bubble();
-    std::cout<<"\n\nArray after bubble sort is: "<<std::endl;
-    first->prnt();
-    delete first;
+    bub first;
+    int arr[] = {1,5,4,6,2,3};
+    int N = sizeof(arr)/sizeof(int);
+    first.prnt(arr, N);
+    first.srt(N, arr);
+    first.prnt(arr, N);
     return 0;
 }
 
-void bub::prnt(){
-    for(int i = 0; i < 10; i++){
-        std::cout<<arr[i]<<" ";
-    }
-}
-int* bub::bubble(){
-    while(!cond){
-        cond = true;
+void bub::srt(int size, int* arr){
+    update = size;
+    while(!sorted){
+        sorted = true;
         for(int i = 0; i < update; i++){
             if(arr[i] > arr[i + 1]){
-                temp = arr[i];
-                arr[i] = arr[i + 1];
-                arr[i + 1] = temp;
-                cond = false;
+                swap(&arr[i], &arr[i+1]);
+                sorted = false;
             }
         }
         update -= 1;
     }
-    return arr;
+    
+}
+
+void bub::swap(int* a, int* b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void bub::prnt(int* arr, int size){
+    for(int i = 0; i < size; i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
 }
