@@ -23,7 +23,11 @@ int main(){
     int N = sizeof(arr)/sizeof(int);
     first.prnt(arr, N);
     first.srt(N, arr);
-    first.prnt(arr, N);
+    //first.prnt(arr, N);
+    for(int i = 0; i < N; i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
     return 0;
 }
 
@@ -33,15 +37,14 @@ void bub::srt(int size, int* arr){
         sorted = true;
         for(int i = 0; i < update; i++){
             if(arr[i] > arr[i + 1]){
-                swap(&arr[i], &arr[i+1]);
-                sorted = false;
+            swap(&arr[i], &arr[i + 1]);
+            sorted = false;
             }
         }
         update -= 1;
     }
     
 }
-
 void bub::swap(int* a, int* b){
     int temp = *a;
     *a = *b;
