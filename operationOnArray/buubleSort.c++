@@ -1,58 +1,54 @@
 #include <iostream>
 using namespace::std;
 
-class bub{
+class Bub{
     private:
-    int update;
-    bool sorted;
-    void swap(int*, int*);
-
+    int *arr, N;
+    bool srted;
     public:
-    void srt(int, int*);
-    void prnt(int* , int);
-    bub();
-    ~bub(){};
+    void srt();
+    void prnt();
+    Bub();
+    Bub(int*, int);
+    ~Bub(){};
+
 };
-bub::bub()
-:update(0), sorted(false){
+Bub::Bub()
+:arr(NULL), srted(false){
+
+}
+Bub::Bub(int* arr, int size)
+:arr(arr), N(size), srted(false){
 
 }
 int main(){
-    bub first;
-    int arr[] = {1,5,4,6,2,3};
-    int N = sizeof(arr)/sizeof(int);
-    first.prnt(arr, N);
-    first.srt(N, arr);
-    //first.prnt(arr, N);
-    for(int i = 0; i < N; i++){
-        cout<<arr[i]<<" ";
-    }
-    cout<<endl;
+    int arr[] = {4,35,2,6,1,8,3};
+    int size = sizeof(arr)/sizeof(int);
+    Bub first(arr, size);
+    first.prnt();
+    first.srt();
+    first.prnt();
     return 0;
 }
 
-void bub::srt(int size, int* arr){
-    update = size;
-    while(!sorted){
-        sorted = true;
-        for(int i = 0; i < update; i++){
-            if(arr[i] > arr[i + 1]){
-            swap(&arr[i], &arr[i + 1]);
-            sorted = false;
+void Bub::srt(){
+    int update = N;
+    while(!srted){
+        srted = true;
+        for(int i = 0; i < update - 1; i++){
+            if(arr[i] > arr[i+1]){
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                srted = false;
             }
         }
-        update -= 1;
-    }
-    
-}
-void bub::swap(int* a, int* b){
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+        --update;
+    } 
 }
 
-void bub::prnt(int* arr, int size){
-    for(int i = 0; i < size; i++){
+void Bub::prnt(){
+    for(int i = 0; i < N; i++){
         cout<<arr[i]<<" ";
     }
     cout<<endl;
