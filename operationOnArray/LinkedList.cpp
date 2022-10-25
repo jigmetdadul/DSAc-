@@ -4,102 +4,120 @@ class linkedList;
 class node{
     private:
     int data;
-    node *next;
+    node* next;
     public:
     friend class linkedList;
-    node(){
-        data = 0;
-        next = NULL;
-    }
-    node(int data){
-        this->data = data;
-        this->next = NULL;
-    }
+    node();
+    node(int);
     ~node(){};
 };
+node::node()
+:data(0), next(NULL)
+{
+}
+node::node(int data)
+:data(data), next(NULL)
+{    
+}
 
 class linkedList{
     private:
-    int count ;
+    int count;
     node* head;
     public:
-    void insertNde(int data);
-    void dlt(int data);
-    void display();
-    linkedList(){
-        head = NULL;
-        count = 1;
-    }
+    void insrtNode(int, int);
+    void insrtNode(int);
+    void dltNode(int);
+    void dltNode();
+    void showNode();
+    linkedList();
+    ~linkedList(){};
 };
-void linkedList::insertNde(int data){
-    node* newNode = new node(data);
-    if(head == NULL){
-        head = newNode;
-        return;
-    }
-    node* temp = head;
-    while(temp->next != NULL){
-        temp = temp -> next;
-    }
-    temp->next = newNode;
+linkedList::linkedList()
+:head(NULL), count(1)
+{   
 }
-
-void linkedList::display(){
-    node* temp = head;
-    cout<<temp -> data<<" ";
-    while(temp -> next != NULL){
-        temp = temp -> next;
-        cout<<temp -> data<<" ";
-    }
-
-}
-void linkedList::dlt(int data){
-    if(head -> data == data){
-        if(head->next == NULL){
-            head->data = 0;
-        }
-        else{
-            head = head->next;
-        }
-        return;
-    }
-    node* temp = head;
-    while(temp->next != NULL){
-          count++;
-          temp = temp -> next;
-    }
-    temp = head;
-    node* temp1 = temp->next;
-    for(int i = 0; i < count; i++){
-        if(temp1->data == data){
-            if(temp1->next == NULL){
-                temp -> next = NULL;
-                delete temp1;
-            }
-            else{
-                temp->next = temp1 ->next;
-                delete temp1;
-            }
-            return;
-        }
-        else{
-            temp = temp -> next;
-            temp1 = temp1 -> next;
-        }
-    }
-}
-
 
 int main(){
-    linkedList first;
-    first.insertNde(12);
-    first.insertNde(23);
-    first.insertNde(24);
-    first.insertNde(26);
-    first.insertNde(45);
-    first.display();
-    cout<<endl;
-    first.dlt(26);
-    first.display();
+    linkedList A;
+    A.insrtNode(12);
+    A.insrtNode(23);
+    A.insrtNode(34);
+    A.insrtNode(56);
+    A.insrtNode(90, 2);
+    A.showNode();
+    A.dltNode();
+    A.showNode();
+    A.dltNode(1);
+    A.showNode();
     return 0;
+}
+
+void linkedList::insrtNode(int data, int pos){
+   node* newNode = new node(data);
+   node* temp = head;
+   while(count < pos){
+    temp = temp->next;
+    count++;
+   }
+   newNode->next = temp->next;
+   temp->next = newNode;
+   delete temp;
+}
+
+void linkedList::insrtNode(int data){
+   node* newNode = new node(data);
+   if(head == NULL){
+    head = newNode;
+    return;
+   }
+   node* temp = head;
+   while(temp->next != NULL){
+    temp = temp->next;
+   }
+   temp->next = newNode;
+   temp = NULL;
+   delete temp;
+} 
+
+void linkedList::showNode(){
+    node* temp = head;
+    while(temp ->next != NULL){
+        cout<<temp->data<<" ";
+        temp = temp->next;
+    }
+    cout<<temp->data;
+    cout<<endl;
+}
+
+void linkedList::dltNode(){
+    node* temp = head;
+    node* prevNode = NULL;
+    while(temp->next != NULL){
+        prevNode = temp;
+        temp = temp->next;
+    }
+    if(temp != head){
+    prevNode->next = NULL;
+    }
+    else{
+        head = NULL;
+    }
+}
+
+void linkedList::dltNode(int pos){
+    node* temp = head;
+    node* prevNode = NULL;
+    count = 1;
+    if(pos == 1){
+      head = head->next;
+    }
+    else{
+    while(count < pos){
+        prevNode = temp;
+        temp = temp->next;
+        count++;
+    }
+    prevNode->next = temp->next;
+    } 
 }
