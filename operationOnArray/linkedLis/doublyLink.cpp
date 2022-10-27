@@ -28,6 +28,7 @@ class linkedList{
     public:
     void insrtNode(int, int);
     void insrtNode(int);
+    void dltNode(int);
     void dltNode();
     void showNode();
     linkedList();
@@ -47,6 +48,10 @@ int main(){
     A.insrtNode(34);
     A.insrtNode(45);
     A.insrtNode(90,1);
+    A.showNode();
+    A.dltNode();
+    A.dltNode(1);
+    
     A.showNode();
     return 0;
 }
@@ -76,13 +81,44 @@ void linkedList::insrtNode(int data, int pos){
     newNode->prev = temp;
     temp->next = newNode;
     newNode->next->prev = newNode;
+}
+void linkedList::dltNode(int pos){
+    node* temp = head;
+    int count = 1;
+    if(pos == 1){
+        head = temp -> next;
+        head->prev = NULL;
+        delete(temp);
+        return;
+    }
+    while(count < pos){
+        temp = temp->next;
+        count++;
+    }
+    (temp->prev)->next = temp->next;
+    (temp->next)->prev = temp->prev;
+    delete temp;
     
 }
 void linkedList::dltNode(){
+    node* temp = tail, *prev = tail->prev;
+    if(head == tail){
+        head = NULL;
+        tail = NULL;
+        return;
+    }
+        prev -> next = NULL;
+        tail = prev;
+        delete temp;
+    
     
 }    
 void linkedList::showNode(){
     node* temp = head;
+    if(head == NULL){
+        cout<<"\t\tNo data to be shown!!"<<endl;
+        return;
+    }
     while(temp-> next != NULL){
         cout<<temp->data<<" ";
         temp = temp->next;
