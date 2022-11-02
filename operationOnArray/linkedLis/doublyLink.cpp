@@ -43,15 +43,19 @@ linkedList::linkedList()
 
 int main(){
     linkedList A;
+    
     A.insrtNode(12);
     A.insrtNode(23);
     A.insrtNode(34);
     A.insrtNode(45);
+    cout<<"Inserting 12, 23, 34, 45 from the end: ";
+    A.showNode();
     A.insrtNode(90,1);
+    cout<<"Inseting 90 at the given position: ";
     A.showNode();
     A.dltNode();
     A.dltNode(1);
-    
+    cout<<"Deleting one integer from the end and the start: ";
     A.showNode();
     return 0;
 }
