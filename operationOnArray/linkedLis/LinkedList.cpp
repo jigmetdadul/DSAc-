@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace::std;
+
 class linkedList;
 class node{
     private:
@@ -45,6 +46,7 @@ int main(){
     A.insrtNode(34);
     A.insrtNode(56);
     A.insrtNode(90, 2);
+    A.insrtNode(23,3); 
     A.showNode();
     A.dltNode();
     A.showNode();
@@ -56,13 +58,14 @@ int main(){
 void linkedList::insrtNode(int data, int pos){
    node* newNode = new node(data);
    node* temp = head;
+   count = 1;
    while(count < pos){
     temp = temp->next;
     count++;
    }
    newNode->next = temp->next;
    temp->next = newNode;
-   delete temp;
+   //delete temp;
 }
 
 void linkedList::insrtNode(int data){
