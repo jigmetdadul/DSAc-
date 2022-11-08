@@ -1,23 +1,24 @@
 #include <iostream>
 using namespace::std;
-
 class linkedList;
 class node{
     private:
-    int data;
+    int studentId, rank;
+    string name;
+
     node* next;
     public:
     friend class linkedList;
     node();
-    node(int);
+    node(int, int, string);
     ~node(){};
 };
 node::node()
-:data(0), next(NULL)
+:studentId(0), rank(0),name(""),  next(NULL)
 {
 }
-node::node(int data)
-:data(data), next(NULL)
+node::node(int studentId, int rank, string name)
+:studentId(studentId), rank(rank), name(name), next(NULL)
 {    
 }
 
@@ -26,8 +27,8 @@ class linkedList{
     int count;
     node* head;
     public:
-    void insrtNode(int, int);
-    void insrtNode(int);
+    void insrtNode(int, int, string, int);
+    void insrtNode(int, int, string);
     void dltNode(int);
     void dltNode();
     void showNode();
@@ -41,35 +42,32 @@ linkedList::linkedList()
 
 int main(){
     linkedList A;
-    A.insrtNode(12);
-    A.insrtNode(23);
-    A.insrtNode(34);
-    A.insrtNode(56);
-    A.insrtNode(90, 2);
-    A.insrtNode(23,3); 
+    A.insrtNode(1, 123, "Jigmet");
+    A.insrtNode(2, 456, "Prabal");
+    A.insrtNode(3, 478, "Yash");
+    A.insrtNode(4, 567, "Asish");
     A.showNode();
     A.dltNode();
-    A.showNode();
     A.dltNode(1);
     A.showNode();
+  
     return 0;
 }
 
-void linkedList::insrtNode(int data, int pos){
-   node* newNode = new node(data);
+void linkedList::insrtNode(int studentId, int rank, string name, int pos){
+   node* newNode = new node(studentId, rank, name);
    node* temp = head;
-   count = 1;
    while(count < pos){
     temp = temp->next;
     count++;
    }
    newNode->next = temp->next;
    temp->next = newNode;
-   //delete temp;
+   delete temp;
 }
 
-void linkedList::insrtNode(int data){
-   node* newNode = new node(data);
+void linkedList::insrtNode(int studentId, int rank, string name){
+   node* newNode = new node(studentId, rank, name);
    if(head == NULL){
     head = newNode;
     return;
@@ -86,10 +84,14 @@ void linkedList::insrtNode(int data){
 void linkedList::showNode(){
     node* temp = head;
     while(temp ->next != NULL){
-        cout<<temp->data<<" ";
+        cout<<"Student ID: "<<temp->studentId<<" "<<endl;
+        cout<<"Rank: "<<temp->rank<<" "<<endl;
+        cout<<"Name: "<<temp->name<<" "<<endl;
         temp = temp->next;
     }
-    cout<<temp->data;
+    cout<<"Student ID: "<<temp->studentId<<" "<<endl;
+    cout<<"Rank: "<<temp->rank<<" "<<endl;
+    cout<<"Name: "<<temp->name<<" "<<endl;
     cout<<endl;
 }
 
@@ -106,6 +108,7 @@ void linkedList::dltNode(){
     else{
         head = NULL;
     }
+    cout<<"\n\tData Deleted from end"<<endl;
 }
 
 void linkedList::dltNode(int pos){
@@ -123,4 +126,5 @@ void linkedList::dltNode(int pos){
     }
     prevNode->next = temp->next;
     } 
+    cout<<"\n\tDeleted at position "<<pos<<"\n"<<endl;
 }
