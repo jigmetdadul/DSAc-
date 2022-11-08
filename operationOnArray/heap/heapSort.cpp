@@ -4,7 +4,6 @@ using namespace::std;
 void swap(int*, int, int);
 void heapify(int*, int, int);
 void srt(int*, int);
-void prnt(int*);
 void printArray(int*, int);
 
 int main(){
@@ -42,6 +41,7 @@ void heapify(int* arr, int size, int i){
         heapify(arr, size, largest);
     }
 }
+
 void srt(int* arr, int size){
 
     for(int i = size/2 - 1; i >= 0; i--){
