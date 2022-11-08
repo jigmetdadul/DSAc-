@@ -13,7 +13,7 @@ class Q{
     int retPeek();
     int retRear();
     void display();
-
+    
     Q();
     ~Q(){}
 };
@@ -25,10 +25,10 @@ Q::Q()
 
 int main(){
     Q first;
-    first.enQ(34);
-    first.enQ(45);
-    first.deQ();
-    first.display();
+    int a = first.retPeek();
+    cout<<a<<endl;
+    a = first.retRear();
+    cout<<a<<endl;
     return 0;
 }
 
@@ -76,5 +76,42 @@ void Q::display(){
         cout<<arr[i]<<" ";
     }
     cout<<endl;
+    }
+}
+
+bool Q::isEmpty(){
+    if(front == -1 && rear == -1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+bool Q::isFull(){
+    if(rear == 4){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int Q::retPeek(){
+    bool a = isEmpty();
+    if(!a){
+        return arr[front];
+    }
+    else{
+        return -000;
+    }
+}
+int Q::retRear(){
+    bool a = isEmpty();
+    if(!a){
+        return arr[rear];
+    }
+    else{
+        return -000;
     }
 }
